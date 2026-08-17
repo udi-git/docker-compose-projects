@@ -22,7 +22,7 @@ def create_container():
 
     client.containers.run(
         image=image_name,
-        name=conainer_name,
+        name=container_name,
         ports=ports_dict,
         detach=True
     ) 
