@@ -1,0 +1,14 @@
+services:
+  clock_app:
+    build: ./clock_app
+    ports:
+      - "5001:5001"
+    environment: 
+      - TZ=Asia/Jerusalem  
+
+  button_app:
+    build: ./button_app
+    ports:
+      - "5002:5002"
+    environment:
+      - TZ=Asia/Jerusalem    
