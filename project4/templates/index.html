@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Manager</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f4f4f9; }
+        .container { max-width: 1000px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2 { color: #333; }
+        form { margin-bottom: 30px; display: flex; gap: 10px; flex-wrap: wrap; }
+        input { padding: 10px; border: 1px solid #ccc; border-radius: 4px; flex: 1; min-width: 150px; }
+        button { padding: 10px 15px; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; white-space: nowrap; }
+        button:hover { background-color: #218838; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #007bff; color: white; }
+        .btn-delete { background-color: #dc3545; color: white; padding: 6px 12px; text-decoration: none; border-radius: 4px; }
+        .btn-delete:hover { background-color: #c82333; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🐳 Flask Docker Manager</h1>
+
+    <h2>Create Container</h2>
+    <form action="/create" method="POST">
+        <input type="text" name="name" placeholder="Container Name" required>
+        <input type="text" name="image" placeholder="Image (e.g., nginx)" required>
+        <input type="text" name="host_port" placeholder="Host Port" required>
+        <input type="text" name="container_port" placeholder="Container Port" required>
+        <button type="submit">Create</button>
+    </form>
+
+    <h3>Existing Containers</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for container in containers %}
+            <tr>
+                <td>{{ container.short_id }}</td>
+                <td>{{ container.name }}</td>
+                <td>{{ container.status }}</td>
+                <td>
+                    <a href="/delete/{{ container.id }}" class="btn-delete">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
